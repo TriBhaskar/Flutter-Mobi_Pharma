@@ -19,3 +19,8 @@ const alreadyHaveAccount ="Already have an account?";
 
 //home strings
 const home = "Home", categories = "Categories", cart = "Cart", account = "Account";
+
+//home screen strings
+
+const searchanything ="Search the product", todayDeal ="Today's Deal", flashsale ="FLash Sale", topCategory="Top category", popularproducts="Popular products";
+const featuredCategories = "Featured Categories";

@@ -8,6 +8,12 @@ const icHome = "assets/icons/home.png";
 const icCategories = "assets/icons/categories.png";
 const icCart = "assets/icons/cart.png";
 const icProfile = "assets/icons/profile.png";
+const icSearch = "assets/icons/search.png";
+const icTodaysDeal = "assets/icons/todays_deal.png";
+const icFlashDeal = "assets/icons/flash_deal.png";
+const icTopCategories = "assets/icons/top_categories.png";
+const icTopSeller = "assets/icons/top_sellers.png";
+const icWholeSale = "assets/icons/wholesale.png";
 /*
 const icAdd = "assets/icons/add.png";
 const icAppLogo = "assets/icons/app_logo.jpg";
@@ -27,7 +33,7 @@ const icDownload = "assets/icons/download.png";
 const icEdit = "assets/icons/edit.png";
 
 const icFavoriteSeller = "assets/icons/favoriteseller.png";
-const icFlashDeal = "assets/icons/flash_deal.png";
+
 
 const icMenu = "assets/icons/o-hamburger.png";
 const icHeadphone = "assets/icons/headphone.png";
@@ -46,22 +52,26 @@ const icPlus = "assets/icons/plus.png";
 const icPoints = "assets/icons/points.png";
 
 const icRefund = "assets/icons/refund.png";
-const icSearch = "assets/icons/search.png";
+
 const icShop = "assets/icons/shop.png";
 const icSplashBg = "assets/icons/splash_login_registration_background_image.png";
 const icSquareLogo = "assets/icons/square_logo.png";
-const icTodaysDeal = "assets/icons/todays_deal.png";
-const icTopCategories = "assets/icons/top_categories.png";
-const icTopSeller = "assets/icons/top_sellers.png";
+
+
+
 const icTrash = "assets/icons/trash.png";
 
 const icWallet = "assets/icons/wallet.png";
 const icWhiteTick = "assets/icons/white_tick.png";
-const icWholeSale = "assets/icons/wholesale.png";
+
 
 //images
 */
 const imgBackground = "assets/images/imgBackground.png";
+const imgSlider1 = "assets/images/imgSlider1.jpg";
+const imgSlider2 = "assets/images/imgSlider2.png";
+const imgSlider3 = "assets/images/imgSlider3.jpg";
+const imgSlider4 = "assets/images/imgSlider4.jpg";
 /*
 const imgB1 = "assets/images/b1.jpeg";
 const imgB2 = "assets/images/b2.jpeg";
@@ -130,10 +140,7 @@ const imgSs2 = "assets/images/ss2.jpg";
 const imgSs3 = "assets/images/ss3.jpg";
 const imgSs4 = "assets/images/ss4.jpg";
 const imgSave = "assets/images/save.png";
-const imgSlider1 = "assets/images/slider_1.png";
-const imgSlider2 = "assets/images/slider_2.png";
-const imgSlider3 = "assets/images/slider_3.png";
-const imgSlider4 = "assets/images/slider_4.png";
+
 const imgSslcommerz = "assets/images/sslcommerz.png";
 const imgStripe = "assets/images/stripe.png";
 const imgTwocheckout = "assets/images/twocheckout.png";

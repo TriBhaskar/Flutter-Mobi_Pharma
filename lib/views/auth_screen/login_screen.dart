@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/consts.dart';
 import 'package:mobi_pharma/consts/lists.dart';
 import 'package:mobi_pharma/views/auth_screen/signup_screen.dart';
-import 'package:mobi_pharma/views/home_screen/home_screen.dart';
+import 'package:mobi_pharma/views/home_screen/home.dart';
 import 'package:mobi_pharma/widgets_common/applogo_widget.dart';
 import 'package:mobi_pharma/widgets_common/bg_widget.dart';
 import 'package:mobi_pharma/widgets_common/our_button.dart';
@@ -36,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                   5.heightBox,
                   // ourButton().box.width(context.screenWidth -50).make(),
                   ourButton( color: grassColor,title: login, textColor: whiteColor, onPress: (){
-                    Get.to(()=> const HomeScreen());
+                    Get.to(()=> const Home());
                   }).box.width(context.screenWidth -50).make(),
                 5.heightBox,
                 createNewAccount.text.color(fontGrey).make(),
