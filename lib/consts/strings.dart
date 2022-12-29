@@ -16,6 +16,7 @@ const loginWith ="Login with";
 const privacyPolicy ="Privacy Policy";
 const termAndCond ="Terms and Conditions";
 const alreadyHaveAccount ="Already have an account?";
+const featuredProduct= "Featured Product";
 
 //home strings
 const home = "Home", categories = "Categories", cart = "Cart", account = "Account";
@@ -24,3 +25,6 @@ const home = "Home", categories = "Categories", cart = "Cart", account = "Accoun
 
 const searchanything ="Search the product", todayDeal ="Today's Deal", flashsale ="FLash Sale", topCategory="Top category", popularproducts="Popular products";
 const featuredCategories = "Featured Categories";
+
+//categories
+const ayurveda = "ayurveda", babycare="babycare", skincare="skincare", fitness="Health & Fitness";

@@ -72,6 +72,19 @@ const imgSlider1 = "assets/images/imgSlider1.jpg";
 const imgSlider2 = "assets/images/imgSlider2.png";
 const imgSlider3 = "assets/images/imgSlider3.jpg";
 const imgSlider4 = "assets/images/imgSlider4.jpg";
+const imgS1 = "assets/images/s1.jpg";
+const imgS2 = "assets/images/s2.jpg";
+const imgS3 = "assets/images/s3.jpg";
+const imgS4 = "assets/images/s4.jpg";
+
+
+const imgP1 = "assets/images/p1.jpg";
+const imgP2 = "assets/images/p6.jpg";
+const imgP3 = "assets/images/p3.jpg";
+const imgP4 = "assets/images/p4.jpg";
+const imgP5 = "assets/images/p5.jpg";
+const imgP6 = "assets/images/p6.jpg";
+const imgP7 = "assets/images/p7.jpg";
 /*
 const imgB1 = "assets/images/b1.jpeg";
 const imgB2 = "assets/images/b2.jpeg";
@@ -102,13 +115,7 @@ const imgInstamojo = "assets/images/instamojo.png";
 const imgIyzico = "assets/images/iyzico.png";
 const imgMpesa = "assets/images/mpesa.png";
 const imgNgenius = "assets/images/ngenius.png";
-const imgP1 = "assets/images/p1.jpeg";
-const imgP2 = "assets/images/p2.jpeg";
-const imgP3 = "assets/images/p3.jpeg";
-const imgP4 = "assets/images/p4.jpeg";
-const imgP5 = "assets/images/p5.jpeg";
-const imgP6 = "assets/images/p6.jpeg";
-const imgP7 = "assets/images/p7.jpeg";
+
 const imgPayfast = "assets/images/payfast.png";
 const imgPayhere = "assets/images/payhere.png";
 const imgPaypal = "assets/images/paypal.png";
@@ -123,10 +130,10 @@ const imgProfile2 = "assets/images/profile_image_joya_ahsan.jpg";
 const imgProfile = "assets/images/profile_image.png";
 const imgRavePayment = "assets/images/rave_payment.png";
 const imgRozarpay = "assets/images/rozarpay.png";
-const imgS1 = "assets/images/s1.jpg";
-const imgS2 = "assets/images/s2.jpg";
-const imgS3 = "assets/images/s3.jpg";
-const imgS4 = "assets/images/s4.jpg";
+
+
+
+
 const imgS5 = "assets/images/s5.jpg";
 const imgS6 = "assets/images/s6.jpg";
 const imgS7 = "assets/images/s7.jpg";

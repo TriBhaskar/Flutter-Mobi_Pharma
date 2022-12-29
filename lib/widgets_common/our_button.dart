@@ -3,7 +3,7 @@ import 'package:mobi_pharma/consts/consts.dart';
 Widget ourButton({onPress, color, textColor, String? title }){
   return ElevatedButton(
     style: ElevatedButton.styleFrom(
-      primary: color,
+      backgroundColor: color,
       padding: const EdgeInsets.all(12),
     ),
     onPressed:onPress,
