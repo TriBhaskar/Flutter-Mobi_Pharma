@@ -85,6 +85,15 @@ const imgP4 = "assets/images/p4.jpg";
 const imgP5 = "assets/images/p5.jpg";
 const imgP6 = "assets/images/p6.jpg";
 const imgP7 = "assets/images/p7.jpg";
+
+const imgFc1 = "assets/images/fc1.jpg";
+const imgFc2 = "assets/images/fc2.jpg";
+const imgFc3 = "assets/images/fc3.jpg";
+const imgFc4 = "assets/images/fc4.jpg";
+const imgFc5 = "assets/images/fc5.jpg";
+const imgFc6 = "assets/images/fc6.jpg";
+const imgFc7 = "assets/images/fc7.jpg";
+const imgFc8 = "assets/images/fc8.jpg";
 /*
 const imgB1 = "assets/images/b1.jpeg";
 const imgB2 = "assets/images/b2.jpeg";
@@ -97,14 +106,7 @@ const imgB8 = "assets/images/b8.jpeg";
 const imgB9 = "assets/images/b9.jpeg";
 const imgB10 = "assets/images/b10.jpeg";
 const imgCod = "assets/images/cod.png";
-const imgFc1 = "assets/images/fc1.jpeg";
-const imgFc2 = "assets/images/fc2.jpeg";
-const imgFc3 = "assets/images/fc3.jpeg";
-const imgFc4 = "assets/images/fc4.jpeg";
-const imgFc5 = "assets/images/fc5.jpeg";
-const imgFc6 = "assets/images/fc6.jpeg";
-const imgFc7 = "assets/images/fc7.jpeg";
-const imgFc8 = "assets/images/fc8.jpeg";
+
 const imgFc9 = "assets/images/fc9.jpeg";
 const imgFc10 = "assets/images/fc10.jpg";
 const imgFd1 = "assets/images/fd1.jpg";

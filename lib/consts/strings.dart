@@ -27,4 +27,7 @@ const searchanything ="Search the product", todayDeal ="Today's Deal", flashsale
 const featuredCategories = "Featured Categories";
 
 //categories
-const ayurveda = "ayurveda", babycare="babycare", skincare="skincare", fitness="Health & Fitness";
+const ayurveda = "ayurveda", babycare="babycare", skincare="skincare", fitness="Health & Fitness", mengromming="men gromming",
+eyecare="eye care", diabets="diabetis", oralcare="oralcare";
+
+//category strings
