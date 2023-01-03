@@ -8,3 +8,4 @@ const Color lightGrey = Color.fromRGBO(239, 239, 239, 1);
 const Color grassColor =  Color(0xff4E6C50);
 const Color darkGreen = Color(0xff395144);
 const Color lightGolden = Color(0xffFEEAD1);
+const Color darkred = Color.fromARGB(255, 151, 33, 15);

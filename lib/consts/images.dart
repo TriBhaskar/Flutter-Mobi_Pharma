@@ -14,6 +14,8 @@ const icFlashDeal = "assets/icons/flash_deal.png";
 const icTopCategories = "assets/icons/top_categories.png";
 const icTopSeller = "assets/icons/top_sellers.png";
 const icWholeSale = "assets/icons/wholesale.png";
+const icOrder = "assets/icons/order.png";
+const icMessages = "assets/icons/messages.png";
 /*
 const icAdd = "assets/icons/add.png";
 const icAppLogo = "assets/icons/app_logo.jpg";
@@ -41,10 +43,10 @@ const icHeart = "assets/icons/heart.png";
 
 const icLogin = "assets/icons/login.png";
 const icLogout = "assets/icons/logout.png";
-const icMessages = "assets/icons/messages.png";
+
 const icMinus = "assets/icons/minus.png";
 const icMore = "assets/icons/more.png";
-const icOrder = "assets/icons/order.png";
+
 const icOrders = "assets/icons/orders.png";
 const icPlaceholderRect = "assets/icons/placeholder_rectangle.png";
 const icPlaceholder = "assets/icons/placeholder.png";
@@ -94,6 +96,8 @@ const imgFc5 = "assets/images/fc5.jpg";
 const imgFc6 = "assets/images/fc6.jpg";
 const imgFc7 = "assets/images/fc7.jpg";
 const imgFc8 = "assets/images/fc8.jpg";
+
+const imgProfile2 = "assets/images/fc7.jpg";
 /*
 const imgB1 = "assets/images/b1.jpeg";
 const imgB2 = "assets/images/b2.jpeg";
@@ -128,7 +132,7 @@ const imgPi2 = "assets/images/pi2.jpg";
 const imgPi3 = "assets/images/pi3.jpg";
 const imgPi4 = "assets/images/pi4.jpg";
 const imgPi5 = "assets/images/pi5.jpg";
-const imgProfile2 = "assets/images/profile_image_joya_ahsan.jpg";
+
 const imgProfile = "assets/images/profile_image.png";
 const imgRavePayment = "assets/images/rave_payment.png";
 const imgRozarpay = "assets/images/rozarpay.png";

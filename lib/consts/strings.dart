@@ -10,6 +10,7 @@ const name = "Name";
 const nameHint ="Bhaskar Panthri";
 const forgetPass = "Forget Password";
 const login = "Login";
+const logout = "Logout";
 const signup ="Signup";
 const createNewAccount = "or, Create a new account";
 const loginWith ="Login with";
@@ -31,3 +32,8 @@ const ayurveda = "ayurveda", babycare="babycare", skincare="skincare", fitness="
 eyecare="eye care", diabets="diabetis", oralcare="oralcare";
 
 //category strings
+
+
+//profile strings
+
+const wishlist="My Wishlist", orders ="My Orders", messages ="Messages";
