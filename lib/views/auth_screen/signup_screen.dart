@@ -2,6 +2,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:mobi_pharma/controllers/auth_controller.dart';
+import 'package:mobi_pharma/views/home_screen/home.dart';
 
 import '../../consts/consts.dart';
 import '../../widgets_common/applogo_widget.dart';
@@ -19,6 +21,13 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   // get socialIconList => null;
 bool? iscCheck = false;
+var controller = Get.put(AuthController());
+
+//text controllers
+var nameController = TextEditingController();
+var emailController = TextEditingController();
+var passwordController = TextEditingController();
+var passwordRetypeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +44,10 @@ bool? iscCheck = false;
             Column(
               children: [
 
-                customTextField(hint: nameHint,title: name),
-                customTextField(hint: emailHint,title: email),
-                customTextField(hint: passwordHint,title: password),
-                customTextField(hint: passwordHint,title: retypePassword),
+                customTextField(hint: nameHint,title: name, controller: nameController, isPass: false),
+                customTextField(hint: emailHint,title: email, controller: emailController, isPass: false),
+                customTextField(hint: passwordHint,title: password, controller: passwordController, isPass: true),
+                customTextField(hint: passwordHint,title: retypePassword, controller: passwordRetypeController,isPass: true),
                 Align( 
                   alignment : Alignment.centerRight,
                   child: TextButton(onPressed: (){}, child: forgetPass.text.make())),
@@ -75,7 +84,29 @@ bool? iscCheck = false;
                     )
                   ],
                 ),
-                ourButton( color: iscCheck == true? grassColor : lightGrey,title: signup, textColor: whiteColor, onPress: (){}).box.width(context.screenWidth -50).make(),
+                ourButton( color: iscCheck == true? grassColor : lightGrey,
+                title: signup, textColor: whiteColor, 
+                onPress: () async{
+                  if(iscCheck !=false){
+                    try{
+                      await controller.signupMethod(context: context, email: emailController.text,password:passwordController.text)
+                      .then((value){
+                        return controller.storeUserData(
+                          email: emailController.text,
+                          password:passwordController.text,
+                          name:nameController.text
+                        );
+                      }).then((value){
+                        VxToast.show(context, msg: loggedin);
+                        Get.offAll(()=>const Home());
+                      });
+                    } catch (e){
+                      auth.signOut();
+                      VxToast.show(context, msg: e.toString());
+                    }
+                  }
+                },
+                ).box.width(context.screenWidth -50).make(),
 
                 10.heightBox,
                 //Wrapping into gesture detetctor of velocity x

@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/consts.dart';
 import 'package:mobi_pharma/consts/lists.dart';
+import 'package:mobi_pharma/controllers/auth_controller.dart';
 import 'package:mobi_pharma/views/auth_screen/signup_screen.dart';
 import 'package:mobi_pharma/views/home_screen/home.dart';
 import 'package:mobi_pharma/widgets_common/applogo_widget.dart';
@@ -16,6 +17,13 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.put(AuthController());
+
+
+
+
+
     return bgWiget(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -28,21 +36,31 @@ class LoginScreen extends StatelessWidget {
 
             Column(
               children: [
-                customTextField(hint: emailHint,title: email),
-                customTextField(hint: passwordHint,title: password),
+                customTextField(hint: emailHint,title: email, isPass: false, controller: controller.emailController),
+                customTextField(hint: passwordHint,title: password, isPass: true, controller: controller.passwordController),
                 Align( 
                   alignment : Alignment.centerRight,
                   child: TextButton(onPressed: (){}, child: forgetPass.text.make())),
                   5.heightBox,
                   // ourButton().box.width(context.screenWidth -50).make(),
-                  ourButton( color: grassColor,title: login, textColor: whiteColor, onPress: (){
-                    Get.to(()=> const Home());
-                  }).box.width(context.screenWidth -50).make(),
+                  ourButton( color: grassColor,
+                  title: login, 
+                  textColor: whiteColor, 
+                  onPress: () async{
+                    await controller.loginMethod(context: context).then((value){
+                      if(value!=null){
+                        VxToast.show(context, msg: loggedin);
+                        Get.offAll(()=> const Home());
+                      }
+                    });
+                    //Get.to(()=> const Home());
+                  },
+                  ).box.width(context.screenWidth -50).make(),
                 5.heightBox,
                 createNewAccount.text.color(fontGrey).make(),
                 5.heightBox,
                 ourButton( color: darkFontGrey,title: signup, textColor: whiteColor, onPress: (){
-                  Get.to(()=>SignupScreen());
+                  Get.to(()=>const SignupScreen());
                 }).box.width(context.screenWidth -50).make(),
                 
                 10.heightBox,

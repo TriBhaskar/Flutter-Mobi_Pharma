@@ -1,6 +1,9 @@
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/lists.dart';
+import 'package:mobi_pharma/controllers/auth_controller.dart';
+import 'package:mobi_pharma/views/auth_screen/login_screen.dart';
 import 'package:mobi_pharma/views/profile_screen/components/details_card.dart';
 import 'package:mobi_pharma/widgets_common/bg_widget.dart';
 
@@ -47,7 +50,10 @@ class ProfileScreen extends StatelessWidget {
                         color: darkred,
                       )
                     ),
-                    onPressed: (){},
+                    onPressed: ()async{
+                      await Get.put(AuthController()).signoutMethod(context);
+                      Get.offAll(()=> const LoginScreen());
+                    },
                     child: logout.text.fontFamily(semibold).black.make(),)
                 ],
               ),

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "900361555105",
+    "project_id": "mobipharma-8441b",
+    "storage_bucket": "mobipharma-8441b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900361555105:android:5aee290d8a3c34adf6b4e0",
+        "android_client_info": {
+          "package_name": "com.example.mobi_pharma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900361555105-fubh48r301acjk62n5k9omf65g2rpvh4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobi_pharma",
+            "certificate_hash": "4d4f01f7d65a134c2c8b58ff02ecd684a2632b54"
+          }
+        },
+        {
+          "client_id": "900361555105-djdeanvjflu8nmudu7bsr671pv10178h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmvkUm4PVcZyCKc55jJwygR3Wujjz2D0k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "900361555105-djdeanvjflu8nmudu7bsr671pv10178h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
