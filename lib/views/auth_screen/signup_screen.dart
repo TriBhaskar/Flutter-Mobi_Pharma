@@ -41,87 +41,92 @@ var passwordRetypeController = TextEditingController();
             applogoWidget(),
             20.heightBox,
 
-            Column(
-              children: [
-
-                customTextField(hint: nameHint,title: name, controller: nameController, isPass: false),
-                customTextField(hint: emailHint,title: email, controller: emailController, isPass: false),
-                customTextField(hint: passwordHint,title: password, controller: passwordController, isPass: true),
-                customTextField(hint: passwordHint,title: retypePassword, controller: passwordRetypeController,isPass: true),
-                Align( 
-                  alignment : Alignment.centerRight,
-                  child: TextButton(onPressed: (){}, child: forgetPass.text.make())),
-                  5.heightBox,
-                  // ourButton().box.width(context.screenWidth -50).make(),
-                Row(
-                  children: [
-                    Checkbox(
-                      checkColor: darkGreen,
-                      value: iscCheck, 
-                    onChanged: (newValue){
-                      setState(() {
-                      iscCheck = newValue;
-                      });
-                    },),
-                    10.widthBox,
-                    Expanded(
-                      child: RichText(text: const TextSpan(
-                        children: [
-                          TextSpan(text: "I agree to the ", style: TextStyle(
-                            fontFamily: bold,
-                            color: fontGrey,
-                          )),
-                          TextSpan(text: termAndCond , style: TextStyle(
-                            fontFamily: bold,
-                            color: darkGreen,
-                          )),
-                          TextSpan(text: privacyPolicy, style: TextStyle(
-                            fontFamily: bold,
-                            color: darkGreen,
-                          ))
-                        ]
-                      )),
-                    )
-                  ],
-                ),
-                ourButton( color: iscCheck == true? grassColor : lightGrey,
-                title: signup, textColor: whiteColor, 
-                onPress: () async{
-                  if(iscCheck !=false){
-                    try{
-                      await controller.signupMethod(context: context, email: emailController.text,password:passwordController.text)
-                      .then((value){
-                        return controller.storeUserData(
-                          email: emailController.text,
-                          password:passwordController.text,
-                          name:nameController.text
-                        );
-                      }).then((value){
-                        VxToast.show(context, msg: loggedin);
-                        Get.offAll(()=>const Home());
-                      });
-                    } catch (e){
-                      auth.signOut();
-                      VxToast.show(context, msg: e.toString());
+            Obx(() => Column(
+                children: [
+            
+                  customTextField(hint: nameHint,title: name, controller: nameController, isPass: false),
+                  customTextField(hint: emailHint,title: email, controller: emailController, isPass: false),
+                  customTextField(hint: passwordHint,title: password, controller: passwordController, isPass: true),
+                  customTextField(hint: passwordHint,title: retypePassword, controller: passwordRetypeController,isPass: true),
+                  Align( 
+                    alignment : Alignment.centerRight,
+                    child: TextButton(onPressed: (){}, child: forgetPass.text.make())),
+                    5.heightBox,
+                    // ourButton().box.width(context.screenWidth -50).make(),
+                  Row(
+                    children: [
+                      Checkbox(
+                        checkColor: darkGreen,
+                        value: iscCheck, 
+                      onChanged: (newValue){
+                        setState(() {
+                        iscCheck = newValue;
+                        });
+                      },),
+                      10.widthBox,
+                      Expanded(
+                        child: RichText(text: const TextSpan(
+                          children: [
+                            TextSpan(text: "I agree to the ", style: TextStyle(
+                              fontFamily: bold,
+                              color: fontGrey,
+                            )),
+                            TextSpan(text: termAndCond , style: TextStyle(
+                              fontFamily: bold,
+                              color: darkGreen,
+                            )),
+                            TextSpan(text: privacyPolicy, style: TextStyle(
+                              fontFamily: bold,
+                              color: darkGreen,
+                            ))
+                          ]
+                        )),
+                      )
+                    ],
+                  ),
+                 controller.isloading.value? const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(darkGreen),
+                 ): ourButton( color: iscCheck == true? grassColor : lightGrey,
+                  title: signup, textColor: whiteColor, 
+                  onPress: () async{
+                    if(iscCheck !=false){
+                      controller.isloading(true);
+                      try{
+                        await controller.signupMethod(context: context, email: emailController.text,password:passwordController.text)
+                        .then((value){
+                          return controller.storeUserData(
+                            email: emailController.text,
+                            password:passwordController.text,
+                            name:nameController.text
+                          );
+                        }).then((value){
+                          VxToast.show(context, msg: loggedin);
+                          Get.offAll(()=>const Home());
+                        });
+                      } catch (e){
+                        auth.signOut();
+                        VxToast.show(context, msg: e.toString());
+                        controller.isloading(false);
+                      }
                     }
-                  }
-                },
-                ).box.width(context.screenWidth -50).make(),
-
-                10.heightBox,
-                //Wrapping into gesture detetctor of velocity x
-                
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    alreadyHaveAccount.text.color(fontGrey).make(),
-                    login.text.color(grassColor).make().onTap(() {
-                      Get.back();
-                    })
-                  ],
-                )
-              ],
-            ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth - 70).shadowSm.make()
+                  },
+                  ).box.width(context.screenWidth -50).make(),
+            
+                  10.heightBox,
+                  //Wrapping into gesture detetctor of velocity x
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      alreadyHaveAccount.text.color(fontGrey).make(),
+                      login.text.color(grassColor).make().onTap(() {
+                        Get.back();
+                      })
+                    ],
+                  )
+                ],
+              ).box.white.rounded.padding(const EdgeInsets.all(16)).width(context.screenWidth - 70).shadowSm.make(),
+            )
           ],
         ),
       ),

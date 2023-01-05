@@ -4,6 +4,10 @@ import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/consts.dart';
 
 class AuthController extends GetxController {
+
+  var isloading =false.obs;
+
+
   //textcontrollers
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
@@ -42,7 +46,12 @@ class AuthController extends GetxController {
       'name':name,
       'password':password,
       'email':email,
-      'imageUrl':''
+      'imageUrl':'',
+      'id':currentUser!.uid,
+      'cart_count':"00",
+      'wishlist_count':"00",
+      'order_count':"00",
+      
     });
   }
 

@@ -1,29 +1,57 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/lists.dart';
 import 'package:mobi_pharma/controllers/auth_controller.dart';
+import 'package:mobi_pharma/controllers/profile_controller.dart';
+import 'package:mobi_pharma/services/firestore_services.dart';
 import 'package:mobi_pharma/views/auth_screen/login_screen.dart';
 import 'package:mobi_pharma/views/profile_screen/components/details_card.dart';
+import 'package:mobi_pharma/views/profile_screen/edit_profile_screen.dart';
 import 'package:mobi_pharma/widgets_common/bg_widget.dart';
 
 import '../../consts/consts.dart';
 
 class ProfileScreen extends StatelessWidget {
+
+  
+
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.put(ProfileController());
     return bgWiget(
       child: Scaffold(
-        body: SafeArea(child: Column(
-          children: [
+        body: StreamBuilder(
+          stream: FirestoreServices.getUser(currentUser!.uid),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if(!snapshot.hasData){
+              return const Center(
+                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation(grassColor),
+                ),
+              );
+            }else{
+
+              var data = snapshot.data!.docs[0];
+
+
+              return SafeArea(
+                child: Column(
+            children: [
             //edit profile button
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: const Align(
                 alignment: Alignment.topRight,
-                child: Icon(Icons.edit, color: darkGreen,)).onTap(() { }),
+                child: Icon(Icons.edit, color: darkGreen,)).onTap(() {
+
+                  controller.nameController.text = data['name'];
+                  controller.passController.text = data['password'];
+                  Get.to(() => EditProfileScreen(data: data));
+                 }),
             ),
 
 
@@ -33,15 +61,21 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Image.asset(imgProfile2, width: 120, fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
+
+                  data['imageUrl']==''?
+
+
+                  Image.asset(imgProfile2, width: 100, fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make()
+                  :
+                  Image.network(data['imageUrl'], width: 100, fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make(),
                  
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      "Dummy User".text.fontFamily(bold).black.make(),
+                      "${data['name']}".text.fontFamily(bold).black.make(),
                       5.heightBox,
-                      "simran.kokal@emmoo.com".text.black.make(),
+                      "${data['email']}".text.black.make(),
                     ],
                   )),
                   OutlinedButton(
@@ -63,9 +97,9 @@ class ProfileScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                detailsCard(count: "00",title: "in your cart", width: context.screenWidth/3.4),
-                detailsCard(count: "00",title: "in your wishlist", width: context.screenWidth/3.4),
-                detailsCard(count: "100",title: "your order", width: context.screenWidth/3.4),
+                detailsCard(count: data['cart_count'],title: "in your cart", width: context.screenWidth/3.4),
+                detailsCard(count: data['wishlist_count'],title: "in your wishlist", width: context.screenWidth/3.4),
+                detailsCard(count: data['order_count'],title: "your order", width: context.screenWidth/3.4),
               ],
             ),
 
@@ -94,8 +128,12 @@ class ProfileScreen extends StatelessWidget {
             ),
 
           ],
-        )),
-      )
+        ));
+            }
+          },
+        )
+
+      ),
     );
   }
 }
