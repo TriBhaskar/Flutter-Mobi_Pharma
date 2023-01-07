@@ -33,7 +33,9 @@ const featuredCategories = "Featured Categories";
 const ayurveda = "ayurveda", babycare="babycare", skincare="skincare", fitness="Health & Fitness", mengromming="men gromming",
 eyecare="eye care", diabets="diabetis", oralcare="oralcare";
 
-//category strings
+//password strings
+
+const oldpass="Old password", newpass = "New Password";
 
 
 //profile strings

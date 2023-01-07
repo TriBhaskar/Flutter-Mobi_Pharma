@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:mobi_pharma/consts/consts.dart';
@@ -6,7 +7,8 @@ import 'package:mobi_pharma/widgets_common/our_button.dart';
 
 class ItemDetails extends StatelessWidget {
   final String? title;
-  const ItemDetails({super.key, required this.title});
+  final dynamic data;
+  const ItemDetails({super.key, required this.title, this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +34,10 @@ class ItemDetails extends StatelessWidget {
                     autoPlay: true,
                     height: 350,
                     aspectRatio: 16/9,
-                    itemCount: 2, 
+                    viewportFraction: 1.0,
+                    itemCount: data['p_imgs'].length, 
                     itemBuilder: (context, index) {
-                    return Image.asset(imgFc5,width: double.infinity,fit: BoxFit.cover,);
+                    return Image.network(data['p_imgs'][index],width: double.infinity,fit: BoxFit.cover,);
                   }),
 
                   10.heightBox,
@@ -42,14 +45,19 @@ class ItemDetails extends StatelessWidget {
                   title!.text.size(16).color(darkFontGrey).fontFamily(semibold).make(),
                   10.heightBox,
                   //rating
-                  VxRating(onRatingUpdate: (value){},
+                  VxRating(
+                    isSelectable: false,
+                  value: double.parse(data['p_rating']),  
+                  onRatingUpdate: (value){},
                   normalColor: textfieldGrey,
-                  selectionColor: lightGolden,
+                  selectionColor: Colors.amberAccent,
                   count: 5,
-                  size: 25,stepInt: true,),
+                  maxRating: 5,
+                  size: 25,
+                  ),
 
                   10.heightBox,
-                  "₹209".text.size(24).color(Colors.redAccent).fontFamily(bold).make(),
+                  "₹ ${data['p_price']}".text.size(24).color(Colors.redAccent).fontFamily(bold).make(),
 
                   10.heightBox,
 
@@ -61,7 +69,7 @@ class ItemDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           5.heightBox,
-                          "This is the product description".text.black.fontFamily(semibold).size(16).make(),
+                          "${data['p_symtoms']}".text.black.fontFamily(semibold).size(16).make(),
                         ],
                       )),
                       const CircleAvatar(
@@ -82,7 +90,7 @@ class ItemDetails extends StatelessWidget {
                             children: [
                               SizedBox(
                                 width: 100,
-                                child: "Size :".text.size(18).color(textfieldGrey).make(),
+                                child: "Quantity :".text.size(18).color(textfieldGrey).make(),
                               ),
                               Row(
                                 children: [
@@ -90,7 +98,7 @@ class ItemDetails extends StatelessWidget {
                                   "0".text.size(16).color(darkFontGrey).fontFamily(bold).make(),
                                   IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
                                   10.widthBox,
-                                  "(0 available)".text.color(textfieldGrey).make(),
+                                  "(${data['p_quantity']}  available)".text.color(textfieldGrey).make(),
                                 ],
                               ),
 

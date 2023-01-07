@@ -13,8 +13,6 @@ import 'package:mobi_pharma/widgets_common/our_button.dart';
 class EditProfileScreen extends StatelessWidget {
 
   final dynamic data;
-
-
   const EditProfileScreen({super.key,this.data});
 
   @override
@@ -22,9 +20,9 @@ class EditProfileScreen extends StatelessWidget {
 
     var controller =Get.find<ProfileController>();
     
-
     return bgWiget(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: Obx(
           () => Column(
@@ -60,11 +58,18 @@ class EditProfileScreen extends StatelessWidget {
                   title: name,
                   isPass: false
                  ),
-        
+                  10.heightBox,
                   customTextField(
-                    controller: controller.passController,
+                    controller: controller.oldpassController,
                   hint: passwordHint,
-                  title: password,
+                  title: oldpass,
+                  isPass: true
+                 ),
+                  10.heightBox,
+                  customTextField(
+                    controller: controller.newpassController,
+                  hint: passwordHint,
+                  title: newpass,
                   isPass: true
                  ),
                  20.heightBox,
@@ -75,16 +80,33 @@ class EditProfileScreen extends StatelessWidget {
                   child: ourButton(
                     color: grassColor,
                     onPress:() async{
+
                     controller.isloading(true);
-                   await controller.uploadProfileImage();
-                    await controller.updateProfile(
+
+                    //if image is not selected 
+                    if(controller.profileImgPath.value.isNotEmpty){
+                      await controller.uploadProfileImage();
+                    }else{
+                      controller.profileImageLink =data['imageUrl'];
+                    }
+
+                    //if old password matches database
+
+                    if(data['password']==controller.oldpassController.text){
+                      await controller.changeAuthPassword(
+                        email: data['email'],
+                        password: controller.oldpassController.text,
+                        newpassword: controller.newpassController.text);
+                        
+                      await controller.updateProfile(
                       imgUrl: controller.profileImageLink,
                       name: controller.nameController.text,
-                      password: controller.passController.text,
-                    );
+                      password: controller.newpassController.text);
                     VxToast.show(context, msg: "Updated");
-
-
+                    }else{
+                      VxToast.show(context, msg: "Wrong old password");
+                      controller.isloading(false);
+                    }
                   },textColor: whiteColor,title: "Save")),
           ],
           ).box.white.shadowSm.padding(const EdgeInsets.all(16)).margin(const EdgeInsets.only(top: 50,left: 12,right: 12)).rounded.make(),
