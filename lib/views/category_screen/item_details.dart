@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/consts.dart';
-import 'package:mobi_pharma/consts/consts.dart';
+import 'package:mobi_pharma/controllers/product_controller.dart';
 import 'package:mobi_pharma/widgets_common/our_button.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -12,6 +13,8 @@ class ItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
+   // var controller = Get.find<ProductController>();
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -92,43 +95,49 @@ class ItemDetails extends StatelessWidget {
                                 width: 100,
                                 child: "Quantity :".text.size(18).color(textfieldGrey).make(),
                               ),
-                              Row(
-                                children: [
-                                  IconButton(onPressed: (){}, icon: const Icon(Icons.remove)),
-                                  "0".text.size(16).color(darkFontGrey).fontFamily(bold).make(),
-                                  IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
-                                  10.widthBox,
-                                  "(${data['p_quantity']}  available)".text.color(textfieldGrey).make(),
-                                ],
+                              Obx(()=> Row(
+                                  children: [
+                                    IconButton(onPressed: (){
+                                      controller.decreaseQuantity();
+                                      controller.calculateTotalPrice(int.parse(data['p_price']));
+                                    }, 
+                                    icon: const Icon(Icons.remove)),
+                                    controller.quantity.value.text.size(16).color(darkFontGrey).fontFamily(bold).make(),
+                                    IconButton(
+                                      onPressed: (){
+                                      controller.increaseQuantity(int.parse(data['p_quantity']));
+                                      controller.calculateTotalPrice(int.parse(data['p_price']));
+                                    }, 
+                                    icon: const Icon(Icons.add)),
+                                    10.widthBox,
+                                    "(${data['p_quantity']}  available)".text.color(textfieldGrey).make(),
+                                  ],
+                                ),
                               ),
 
                             ],
                           ).box.padding(const EdgeInsets.all(8)).make(),
-                        
-                      
 
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 100,
-                            child: "Total :".text.size(18).color(textfieldGrey).make(),
-                          ),
-                          Row(
-                            children: [
-                              "₹ 0.00".text.color(Colors.redAccent).size(18).fontFamily(bold).make(),
-                            ],
-                          ),
 
+                            Obx(()=> Row(
+                                children: [
+                                  SizedBox(
+                                    width: 100,
+                                    child: "Total :".text.size(18).color(textfieldGrey).make(),
+                                  ),
+                                  "₹ ${controller.totalPrice.value}".text.color(Colors.redAccent).size(18).fontFamily(bold).make(),
+                            
+                                ],
+                              ).box.padding(const EdgeInsets.all(8)).make(),
+                            ),
                         ],
-                      ).box.padding(const EdgeInsets.all(8)).make(),
-                    ],
-                  ).box.white.make(),
+                     ).box.white.make(),
 
                   //discription more
                   10.heightBox,
                   "Description".text.size(18).color(darkFontGrey).fontFamily(semibold).make(),
                   10.heightBox,
-                  "This is the  full description of product like symptomssadasdasdasdadad".text.color(darkFontGrey).make(),
+                  "${data['p_desc']}".text.color(darkFontGrey).make(),
                   ],
               ),
             ),

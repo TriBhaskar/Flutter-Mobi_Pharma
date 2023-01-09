@@ -32,7 +32,7 @@ class EditProfileScreen extends StatelessWidget {
             //if data image url and controller path is empty
         
          data['imageUrl'] == '' &&  controller.profileImgPath.isEmpty
-            ? Image.asset(imgProfile2, width: 120, fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make() 
+            ? Image.asset(imgProfile2, width: 100, fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make() 
             //if data is not empty but controller path is empty
             :data['imageUrl'] != '' && controller.profileImgPath.isEmpty
             ?
@@ -51,7 +51,7 @@ class EditProfileScreen extends StatelessWidget {
                   controller.changeImage(context);
                  },textColor: whiteColor,title: "Change"),
                  const Divider(),
-                 20.heightBox,
+                 10.heightBox,
                  customTextField(
                   controller: controller.nameController,
                   hint: nameHint,
@@ -72,7 +72,7 @@ class EditProfileScreen extends StatelessWidget {
                   title: newpass,
                   isPass: true
                  ),
-                 20.heightBox,
+                 10.heightBox,
                     controller.isloading.value? const CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation(grassColor),
                     ):   SizedBox(

@@ -15,8 +15,6 @@ import '../../consts/consts.dart';
 
 class ProfileScreen extends StatelessWidget {
 
-  
-
   const ProfileScreen({super.key});
 
   @override
@@ -34,9 +32,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               );
             }else{
-
               var data = snapshot.data!.docs[0];
-
 
               return SafeArea(
                 child: Column(
@@ -47,13 +43,10 @@ class ProfileScreen extends StatelessWidget {
               child: const Align(
                 alignment: Alignment.topRight,
                 child: Icon(Icons.edit, color: darkGreen,)).onTap(() {
-
                   controller.nameController.text = data['name'];
-                  
                   Get.to(() => EditProfileScreen(data: data));
                  }),
             ),
-
 
             //users details section
 
@@ -63,7 +56,6 @@ class ProfileScreen extends StatelessWidget {
                 children: [
 
                   data['imageUrl']==''?
-
 
                   Image.asset(imgProfile2, width: 100, fit: BoxFit.cover).box.roundedFull.clip(Clip.antiAlias).make()
                   :
