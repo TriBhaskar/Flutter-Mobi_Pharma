@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/consts.dart';
+import 'package:mobi_pharma/controllers/product_controller.dart';
 import 'package:mobi_pharma/services/firestore_services.dart';
 import 'package:mobi_pharma/views/category_screen/item_details.dart';
 import 'package:mobi_pharma/widgets_common/bg_widget.dart';
@@ -17,6 +18,8 @@ class CategoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
+
     return bgWiget(
       child: Scaffold(
         appBar: AppBar(
@@ -71,8 +74,14 @@ class CategoryDetails extends StatelessWidget {
                         ).box.
                         white.
                         margin(const EdgeInsets.symmetric(horizontal: 4)).
-                        roundedSM.outerShadowSm.padding(const EdgeInsets.all(12)).make().onTap(() {
-                          Get.to(()=> ItemDetails(title: "${data[index]['p_name']}", data:data[index]));
+                        roundedSM.outerShadowSm
+                        .padding(const EdgeInsets
+                        .all(12))
+                        .make()
+                        .onTap(() {
+                          controller.checkIfFav(data[index]);
+                          Get.to(
+                            ()=> ItemDetails(title: "${data[index]['p_name']}", data:data[index]));
                         });
 
               }))

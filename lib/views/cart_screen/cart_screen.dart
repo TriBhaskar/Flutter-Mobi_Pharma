@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:mobi_pharma/controllers/cart_controller.dart';
 import 'package:mobi_pharma/services/firestore_services.dart';
+import 'package:mobi_pharma/views/cart_screen/shipping_screen.dart';
 import 'package:mobi_pharma/widgets_common/loading_indicator.dart';
 import 'package:mobi_pharma/widgets_common/our_button.dart';
 
@@ -19,6 +20,17 @@ class CartScreen extends StatelessWidget {
     var controller = Get.put(CartController());
     return Scaffold(
       backgroundColor: whiteColor,
+      bottomNavigationBar: SizedBox(
+        height: 60, 
+        child: ourButton(
+                    color: Colors.amber,
+                    onPress: (){
+                      Get.to(() => const ShippingDetails());
+                    },
+                    textColor: whiteColor,
+                    title: "Proceed to shipping",
+                  ),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: "Medi-Cart".text.color(darkFontGrey).fontFamily(semibold).make(),
@@ -81,15 +93,15 @@ class CartScreen extends StatelessWidget {
             ],
           ).box.padding(const EdgeInsets.all(12)).width(context.screenWidth-60).color(lightGolden).roundedSM.make(),
             10.heightBox,
-              SizedBox(
-                width: context.screenWidth -60,
-                child: ourButton(
-                  color: Colors.amber,
-                  onPress: (){},
-                  textColor: whiteColor,
-                  title: "Proceed to shipping",
-                ),
-                ),
+              // SizedBox(
+              //   width: context.screenWidth -60,
+              //   child: ourButton(
+              //     color: Colors.amber,
+              //     onPress: (){},
+              //     textColor: whiteColor,
+              //     title: "Proceed to shipping",
+              //   ),
+              //   ),
           ]
         ),
       );
