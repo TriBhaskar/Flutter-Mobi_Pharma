@@ -23,6 +23,9 @@ class PaymentMethods extends StatefulWidget {
 class _PaymentMethodsState extends State<PaymentMethods> {
   var pickedimage;
   String imagename='';
+  var ImageLink = '';
+ XFile? sfile;
+  var imagepath ='';
   // final firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
 FirebaseFirestore firestoreRef = FirebaseFirestore.instance;
 FirebaseStorage storageRef = FirebaseStorage.instance;
@@ -32,13 +35,24 @@ FirebaseStorage storageRef = FirebaseStorage.instance;
         final XFile? image =await ImagePicker().pickImage(source: ImageSource.gallery);
         setState(() {
           pickedimage=image;
+          sfile = image;
+        //  imagepath.value = image!.path;
           imagename=image!.name.toString();
-          print(imagename);
+          //print(imagename);
       // pickedimage!.path.split('/').last
     }); 
   }
 
   //upload image
+  uploadImage(XFile sfile) async{
+  var filename =imagename;
+  var destination = 'Payment/${currentUser!.uid}/$filename';
+ // print(destination);//correct
+  Reference ref = storageRef.ref().child(destination);
+  await ref.putFile(File(sfile.path));
+  ImageLink = await ref.getDownloadURL();
+ // print(ImageLink);
+}
 
 @override
 
@@ -51,7 +65,7 @@ FirebaseStorage storageRef = FirebaseStorage.instance;
         height: 60,
         child: ourButton(
           onPress: () async {
-            
+            uploadImage(sfile!);
           },
           color: Colors.red,
           textColor: whiteColor,
