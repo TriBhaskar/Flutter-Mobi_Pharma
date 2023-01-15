@@ -96,6 +96,7 @@ const imgFc5 = "assets/images/fc8.jpg";
 const imgFc6 = "assets/images/fc2.jpg";
 const imgFc7 = "assets/images/fc7.jpg";
 const imgFc8 = "assets/images/fc1.jpg";
+const imgbank = "assets/images/bankdetail.png";
 
 const imgProfile2 = "assets/images/fc7.jpg";
 /*
