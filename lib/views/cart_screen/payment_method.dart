@@ -2,7 +2,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
@@ -21,17 +21,25 @@ class PaymentMethods extends StatefulWidget {
 }
 
 class _PaymentMethodsState extends State<PaymentMethods> {
-  var ImgPath=''.obs;
   var pickedimage;
-  final firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+  String imagename='';
+  // final firebase_storage.FirebaseStorage storage = firebase_storage.FirebaseStorage.instance;
+FirebaseFirestore firestoreRef = FirebaseFirestore.instance;
+FirebaseStorage storageRef = FirebaseStorage.instance;
 
-  imagepick() async{
-    final image =await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      pickedimage=image;
-      ImgPath.value = image!.path;
+//image select for payment
+      imagepick() async{
+        final XFile? image =await ImagePicker().pickImage(source: ImageSource.gallery);
+        setState(() {
+          pickedimage=image;
+          imagename=image!.name.toString();
+          print(imagename);
+      // pickedimage!.path.split('/').last
     }); 
   }
+
+  //upload image
+
 @override
 
   Widget build(BuildContext context) {
@@ -67,7 +75,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                 const Text('!! After payment kindly attached the reciept or scrrenshot of your successful payment !!',style: TextStyle(fontSize: 18.0,color: Color.fromARGB(255, 255, 137, 68))),
       20.heightBox,
                 
-                Text(pickedimage == null ?  'No Image selected' : pickedimage!.path.split('/').last),               
+                Text(pickedimage == null ?  'No Image selected' : imagename),               
                
                 10.heightBox,
                      ourButton(color: grassColor,
