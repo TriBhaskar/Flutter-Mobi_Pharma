@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
+import 'package:mobi_pharma/controllers/cart_controller.dart';
 import 'package:path/path.dart';
 import 'package:mobi_pharma/consts/consts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,6 +22,9 @@ class PaymentMethods extends StatefulWidget {
 }
 
 class _PaymentMethodsState extends State<PaymentMethods> {
+
+var controller = Get.find<CartController>();
+
   var pickedimage;
   String imagename='';
   var ImageLink = '';
@@ -50,8 +54,9 @@ FirebaseStorage storageRef = FirebaseStorage.instance;
  // print(destination);//correct
   Reference ref = storageRef.ref().child(destination);
   await ref.putFile(File(sfile.path));
-  ImageLink = await ref.getDownloadURL();
- // print(ImageLink);
+  ImageLink = await ref.getDownloadURL();//link of the image
+//  print("sadsadsad ${ImageLink}");
+  
 }
 
 @override
@@ -65,7 +70,8 @@ FirebaseStorage storageRef = FirebaseStorage.instance;
         height: 60,
         child: ourButton(
           onPress: () async {
-            uploadImage(sfile!);
+         await uploadImage(sfile!);
+            controller.placeMyorder(paymentImage:ImageLink,totalAmount: controller.totalP.value);
           },
           color: Colors.red,
           textColor: whiteColor,
