@@ -24,4 +24,15 @@ class FirestoreServices{
   static  deleteDocument(docId){
     return firestore.collection(cartCollection).doc(docId).delete();
   }
+
+
+  static getAllOrders(){
+    return firestore.collection(ordersCollection).where('order_by',isEqualTo: currentUser!.uid).snapshots();
+  }
+
+  static getWishlists(){
+    return firestore.collection(ordersCollection).where('p_wishlist',arrayContains: currentUser!.uid).snapshots();
+  }
+
+
 }

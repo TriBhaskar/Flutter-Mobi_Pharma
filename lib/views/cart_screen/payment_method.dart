@@ -6,6 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart';
 import 'package:mobi_pharma/controllers/cart_controller.dart';
+import 'package:mobi_pharma/views/home_screen/home.dart';
+import 'package:mobi_pharma/widgets_common/loading_indicator.dart';
 import 'package:path/path.dart';
 import 'package:mobi_pharma/consts/consts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -63,50 +65,57 @@ FirebaseStorage storageRef = FirebaseStorage.instance;
 
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: whiteColor,
-      bottomNavigationBar: SizedBox(
-        height: 60,
-        child: ourButton(
-          onPress: () async {
-         await uploadImage(sfile!);
-            controller.placeMyorder(paymentImage:ImageLink,totalAmount: controller.totalP.value);
-          },
-          color: Colors.red,
-          textColor: whiteColor,
-          title: "Place my order",
-          
+    return Obx(()=> Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: whiteColor,
+        bottomNavigationBar: SizedBox(
+          height: 60,
+          child: controller.placingOrder.value ? Center(
+            child: loadingIndicator(),
+          )
+          : ourButton(
+            onPress: () async {
+           await uploadImage(sfile!);
+              controller.placeMyorder(paymentImage:ImageLink,totalAmount: controller.totalP.value);
+              await controller.clearCart();
+              Get.offAll(const Home());
+              VxToast.show(context, msg: "Order placed successfully");
+            },
+            color: Colors.red,
+            textColor: whiteColor,
+            title: "Place my order",
+            
+          ),
         ),
-      ),
-      appBar: AppBar(
-        title: "Choose Payment Method".text.fontFamily(semibold).color(darkFontGrey).make(),
-      ),
-
-      body:
-       Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Image.asset(imgbank,height: 320,
-                    width: double.infinity,
-                    fit: BoxFit.cover,),
-                const Text('!! After payment kindly attached the reciept or scrrenshot of your successful payment !!',style: TextStyle(fontSize: 18.0,color: Color.fromARGB(255, 255, 137, 68))),
-      20.heightBox,
+        appBar: AppBar(
+          title: "Choose Payment Method".text.fontFamily(semibold).color(darkFontGrey).make(),
+        ),
+    
+        body:
+         Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Image.asset(imgbank,height: 320,
+                      width: double.infinity,
+                      fit: BoxFit.cover,),
+                  const Text('!! After payment kindly attached the reciept or scrrenshot of your successful payment !!',style: TextStyle(fontSize: 18.0,color: Color.fromARGB(255, 255, 137, 68))),
+        20.heightBox,
+                  
+                  Text(pickedimage == null ?  'No Image selected' : imagename),               
+                 
+                  10.heightBox,
+                       ourButton(color: grassColor,
+                       onPress:(){
+                       imagepick();
+                       },textColor: whiteColor,title: "upload image"),
+                ],
                 
-                Text(pickedimage == null ?  'No Image selected' : imagename),               
-               
-                10.heightBox,
-                     ourButton(color: grassColor,
-                     onPress:(){
-                     imagepick();
-                     },textColor: whiteColor,title: "upload image"),
-              ],
-              
+              ),
             ),
           ),
         ),
-      );
+    );
   }
 }

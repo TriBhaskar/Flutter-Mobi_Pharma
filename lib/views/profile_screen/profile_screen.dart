@@ -7,8 +7,10 @@ import 'package:mobi_pharma/controllers/auth_controller.dart';
 import 'package:mobi_pharma/controllers/profile_controller.dart';
 import 'package:mobi_pharma/services/firestore_services.dart';
 import 'package:mobi_pharma/views/auth_screen/login_screen.dart';
+import 'package:mobi_pharma/views/orders_screen/orders_screen.dart';
 import 'package:mobi_pharma/views/profile_screen/components/details_card.dart';
 import 'package:mobi_pharma/views/profile_screen/edit_profile_screen.dart';
+import 'package:mobi_pharma/views/wishlist_screen/wishlist_screen.dart';
 import 'package:mobi_pharma/widgets_common/bg_widget.dart';
 
 import '../../consts/consts.dart';
@@ -110,6 +112,16 @@ class ProfileScreen extends StatelessWidget {
               itemCount: profileButtonsList.length,
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
+                  onTap: (){
+                    switch (index){
+                      case 0:
+                      Get.to(()=>const OrdersScreen());
+                      break;
+                      case 1:
+                      Get.to(()=>const WishlistScreen());
+                      break;
+                    }
+                  },
                   leading: Image.asset(
                   profileButtonsIcon[index],
                   width: 22,),

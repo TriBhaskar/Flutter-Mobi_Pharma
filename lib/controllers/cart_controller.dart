@@ -20,6 +20,7 @@ class CartController extends GetxController {
 
   late dynamic productSnapshot;
   var products=[];
+  var placingOrder = false.obs;
 
   calculate(data){
     totalP.value = 0;
@@ -38,6 +39,8 @@ class CartController extends GetxController {
 
 
   placeMyorder({required paymentImage,required totalAmount}) async{
+
+    placingOrder(true);
 
     await getProductsDetails();
 
@@ -63,6 +66,7 @@ class CartController extends GetxController {
       'orders':FieldValue.arrayUnion(products),
 
     });
+    placingOrder(false);
   }
 
   getProductsDetails(){
@@ -71,10 +75,19 @@ class CartController extends GetxController {
       products.add({
         'img':productSnapshot[i]['img'],
         'qty':productSnapshot[i]['qty'],
+        'tprice':productSnapshot[i]['tprice'],
         'title':productSnapshot[i]['title'],
       });
     }
-    print(products);
+    // print(products);
+  }
+
+
+
+  clearCart(){
+    for(var i =0; i<productSnapshot.length; i++){
+      firestore.collection(cartCollection).doc(productSnapshot[i].id).delete();
+    }
   }
 
   }
