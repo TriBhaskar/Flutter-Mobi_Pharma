@@ -31,8 +31,44 @@ class FirestoreServices{
   }
 
   static getWishlists(){
-    return firestore.collection(ordersCollection).where('p_wishlist',arrayContains: currentUser!.uid).snapshots();
+    return firestore.collection(productsCollection).where('p_wishlist',arrayContains: currentUser!.uid).snapshots();
   }
 
+  static getCounts() async{
+    var res = await Future.wait([
+      firestore.collection(cartCollection).where('added_by',isEqualTo: currentUser!.uid).get().then((value){
+       return value.docs.length;
+               // if(value.docs.isNotEmpty){
+        //   print(value.docs.length);
+        // }
+      }),
+      firestore.collection(productsCollection).where('p_wishlist',arrayContains: currentUser!.uid).get().then((value){
+       return value.docs.length;
+               // if(value.docs.isNotEmpty){
+        //   print(value.docs.length);
+        // }
+      }),
+      firestore.collection(ordersCollection).where('order_by',isEqualTo: currentUser!.uid).get().then((value){
+       return value.docs.length;
+               // if(value.docs.isNotEmpty){
+        //   print(value.docs.length);
+        // }
+      }),
+    ]);
+    return res;
+  }
+
+  static allproducts(){
+    return firestore.collection(productsCollection).snapshots();
+  }
+
+  //get Featured products
+  static getFeaturedProducts(){
+    return firestore.collection(productsCollection).where('is_featured',isEqualTo: true).get();
+  }
+
+  static searchProducts(title){
+    return firestore.collection(productsCollection).get();
+  }
 
 }

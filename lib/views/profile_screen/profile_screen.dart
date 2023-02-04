@@ -12,6 +12,7 @@ import 'package:mobi_pharma/views/profile_screen/components/details_card.dart';
 import 'package:mobi_pharma/views/profile_screen/edit_profile_screen.dart';
 import 'package:mobi_pharma/views/wishlist_screen/wishlist_screen.dart';
 import 'package:mobi_pharma/widgets_common/bg_widget.dart';
+import 'package:mobi_pharma/widgets_common/loading_indicator.dart';
 
 import '../../consts/consts.dart';
 
@@ -88,14 +89,34 @@ class ProfileScreen extends StatelessWidget {
             ),
 
             20.heightBox,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                detailsCard(count: data['cart_count'],title: "in your cart", width: context.screenWidth/3.4),
-                detailsCard(count: data['wishlist_count'],title: "in your wishlist", width: context.screenWidth/3.4),
-                detailsCard(count: data['order_count'],title: "your order", width: context.screenWidth/3.4),
+
+            FutureBuilder(
+              future: FirestoreServices.getCounts(),
+              builder: (BuildContext context, AsyncSnapshot snapshot){
+                if(!snapshot.hasData){
+                  return Center(child: loadingIndicator());
+                }else{
+                  // print(snapshot.data);
+                  var countdata =  snapshot.data;
+                return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                detailsCard(count: countdata[0].toString(),title: "in your cart", width: context.screenWidth/3.4),
+                detailsCard(count: countdata[1].toString(),title: "in your wishlist", width: context.screenWidth/3.4),
+                detailsCard(count: countdata[2].toString(),title: "your order", width: context.screenWidth/3.4),
               ],
+            );
+                }
+              },
             ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     detailsCard(count: data['cart_count'],title: "in your cart", width: context.screenWidth/3.4),
+            //     detailsCard(count: data['wishlist_count'],title: "in your wishlist", width: context.screenWidth/3.4),
+            //     detailsCard(count: data['order_count'],title: "your order", width: context.screenWidth/3.4),
+            //   ],
+            // ),
 
             //buttons section
             20.heightBox,
@@ -119,6 +140,9 @@ class ProfileScreen extends StatelessWidget {
                       break;
                       case 1:
                       Get.to(()=>const WishlistScreen());
+                      break;
+                      case 2:
+                      VxToast.show(context, msg: data['id']);
                       break;
                     }
                   },

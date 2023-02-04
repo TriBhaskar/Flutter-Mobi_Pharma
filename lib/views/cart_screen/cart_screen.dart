@@ -38,7 +38,6 @@ class CartScreen extends StatelessWidget {
 
       body: StreamBuilder(
         stream: FirestoreServices.getCart(currentUser!.uid),
-
         builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot) {
          if(!snapshot.hasData){
           return Center(

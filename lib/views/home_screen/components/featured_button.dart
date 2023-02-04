@@ -1,4 +1,6 @@
+import 'package:get/get.dart';
 import 'package:mobi_pharma/consts/consts.dart';
+import 'package:mobi_pharma/views/category_screen/category_details.dart';
 
 Widget featuredButton({String? title, icon}){
   return Row(
@@ -7,5 +9,11 @@ Widget featuredButton({String? title, icon}){
       10.widthBox,
       title!.text.fontFamily(semibold).color(darkFontGrey).make(),
     ],
-  ).box.width(200).margin(const EdgeInsets.symmetric(horizontal: 4)).white.padding(const EdgeInsets.all(5)).roundedSM.outerShadowSm.make();
+  ).box.width(200).margin(const EdgeInsets.symmetric(horizontal: 4))
+  .white
+  .padding(const EdgeInsets.all(5))
+  .roundedSM.outerShadowSm
+  .make().onTap(() {
+    Get.to(()=> CategoryDetails(title: title));
+  });
 }
